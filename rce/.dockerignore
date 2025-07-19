@@ -1,0 +1,25 @@
+# Maven build output (we build fresh inside the container)
+target
+
+# Local Maven cache (not used unless you copy it in Dockerfile)
+.m2
+
+# IDE/editor files
+.idea
+*.iml
+.vscode
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Git and environment
+.git
+.gitignore
+.env
+
+# Logs
+*.log
+
+# Docker itself (optional)
+Dockerfile

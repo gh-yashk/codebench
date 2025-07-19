@@ -1,0 +1,25 @@
+# Ignore node_modules (will be reinstalled in image)
+node_modules
+
+# Build output (only used locally)
+dist
+
+# Logs
+*.log
+
+# Dependency lock for other environments
+yarn.lock
+pnpm-lock.yaml
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Dockerfile itself (optional)
+Dockerfile
+
+README.md
