@@ -1,41 +1,69 @@
-# CodeBench
+# CodeBench – Full-Stack Coding Practice Platform
 
-A full-stack LeetCode-like online code judge and problem-solving platform.
+**Live Demo:** https://codebench-demo.pages.dev/
+
+A professional coding practice platform inspired by LeetCode, enabling real-time code execution and problem solving across multiple languages.
 
 ---
 
 ## Table of Contents
 
-* [Project Structure](#project-structure)
-* [Features](#features)
-* [Tech Stack](#tech-stack)
-* [Running Locally with Docker Compose](#running-locally-with-docker-compose)
-* [Screenshots](#screenshots)
-* [Acknowledgements](#acknowledgements)
+- [Live Demo](#live-demo)  
+- [Project Structure](#project-structure)  
+- [Features & Performance](#features--performance)  
+- [Architecture Overview](#architecture-overview)  
+- [Tech Stack](#tech-stack)  
+- [Running Locally](#running-locally)  
+- [Screenshots](#screenshots)  
+- [Acknowledgements](#acknowledgements)  
+
+---
+
+## Live Demo
+
+Try it now in your browser:  
+https://codebench-demo.pages.dev/
 
 ---
 
 ## Project Structure
 
-```text
+```
 codebench/
-├── rce/               # Backend (Spring Boot, MySQL, Judge0, GitHub OAuth)
-├── leetcode-ui/       # Frontend (React + Vite + TypeScript + Monaco Editor)
-├── mysql-init/        # MySQL initialization script
-├── docker-compose.yml # Orchestration
-└── README.md          # You're here!
+├── rce/               # Backend (Spring Boot, MySQL, Judge0, GitHub OAuth2)
+├── leetcode-ui/       # Frontend (React, Vite, TypeScript, Monaco Editor)
+├── mysql-init/        # MySQL initialization scripts
+├── docker-compose.yml # Service orchestration
+└── README.md          # Project documentation
 ```
 
 ---
 
-## Features
+## Features & Performance
 
-* **Code Execution** using [Judge0 API](https://judge0.com/)
-* **Authentication** via GitHub OAuth
-* **Frontend** with LeetCode-like interface built in [Vite](https://vite.dev/) + TypeScript + [tailwindcss](https://tailwindcss.com/)
-* **Editor** powered by [Monaco](https://www.npmjs.com/package/@monaco-editor/react)
-* **Containerized** with Docker and orchestrated via `docker-compose`
-* **Database Initialization** using `init.sql` on MySQL container startup
+- **Fast Execution:** Sub-5 second code compilation and execution  
+- **Multi-Language Support:** 10+ programming languages (Python, Java, JavaScript, TypeScript, etc.)  
+- **Professional Editor:** Monaco Editor with syntax highlighting and IntelliSense  
+- **Secure Authentication:** GitHub OAuth2 with server-side session management  
+- **Real-Time Results:** Instant feedback and detailed test case outputs  
+- **Containerized:** Docker Compose orchestration for reliable deployment  
+
+---
+
+## Architecture Overview
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│ React Frontend  │<──>│ Spring Boot API │<──>│   Judge0 API    │
+│ (Vite + TS)     │    │ + MySQL         │    │ (Code Execution │
+│ Monaco Editor   │    │ + OAuth2        │    │ & Compilation)  │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+```
+
+- **Frontend:** React, Vite, TypeScript, Tailwind CSS, Monaco Editor  
+- **Backend:** Spring Boot, Spring Security, GitHub OAuth2, MySQL  
+- **Code Execution:** Judge0 API integration  
+- **Deployment:** Docker Compose, environment-based configuration  
 
 ---
 
@@ -43,68 +71,60 @@ codebench/
 
 ### Backend (`/rce`)
 
-* Spring Boot (Java 21)
-* MySQL 8
-* Judge0
-* Spring Security + OAuth2 (GitHub)
+- Spring Boot (Java 21)  
+- MySQL 8  
+- Judge0 API  
+- Spring Security + OAuth2 (GitHub)  
 
 ### Frontend (`/leetcode-ui`)
 
-* React + Vite + TypeScript
-* TailwindCSS
-* Monaco Editor
+- React + Vite + TypeScript  
+- Tailwind CSS  
+- Monaco Editor  
 
 ### DevOps
 
-* Docker + Docker Compose
-* MySQL init script
-* Environment-based configuration via `.env`
+- Docker + Docker Compose  
+- MySQL initialization scripts  
+- Environment variables via `.env`  
 
 ---
 
-## Running Locally with Docker Compose
+## Running Locally
 
-> Requires [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/)
+Requires Docker and Docker Compose.
 
-### 1. Clone the Repository
+1. **Clone the repository**  
+   ```bash
+   git clone https://github.com/gh-yashk/codebench.git
+   cd codebench
+   ```
 
-```bash
-git clone https://github.com/gh-yashk/codebench.git
-cd codebench
-```
+2. **Create `.env`**  
+   ```ini
+   # MySQL
+   MYSQL_ROOT_PASSWORD=root
 
-### 2. Set Up Environment Variables
+   # Spring Boot
+   SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/rce_db?createDatabaseIfNotExist=true
+   SPRING_DATASOURCE_USERNAME=root
+   SPRING_DATASOURCE_PASSWORD=root
+   FRONTEND_ORIGIN=http://localhost:3001
 
-Create a `.env` file with the following:
+   # External APIs
+   GITHUB_CLIENT_ID=your_client_id
+   GITHUB_CLIENT_SECRET=your_client_secret
+   JUDGE0_API_KEY=your_judge0_key
+   ```
 
-```env
-# MySQL
-MYSQL_ROOT_PASSWORD=root
+3. **Start services**  
+   ```bash
+   docker compose up --build
+   ```
 
-# Spring Boot
-SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/rce_db?createDatabaseIfNotExist=true
-SPRING_DATASOURCE_USERNAME=root
-SPRING_DATASOURCE_PASSWORD=root
-FRONTEND_ORIGIN=http://localhost:3001
-
-# External APIs
-GITHUB_CLIENT_ID=
-GITHUB_CLIENT_SECRET=
-JUDGE0_API_KEY=
-```
-
-> You can get a free Judge0 API key from [RapidAPI](https://rapidapi.com/organization/judge0)
-
-### 3. Start All Services
-
-```bash
-docker-compose up --build
-```
-
-### 4. Open the App
-
-* frontend: [localhost:3001](http://localhost:3001)
-* backend: [localhost:8081](http://localhost:8081)
+4. **Access the app**  
+   - Frontend: http://localhost:3001  
+   - Backend:  http://localhost:8081  
 
 ---
 
@@ -120,11 +140,9 @@ docker-compose up --build
 
 ## Acknowledgements
 
-* [Judge0](https://judge0.com/)
-* [Spring Boot](https://spring.io/)
-* [Vite](https://vite.dev/)
-* [Monaco Editor](https://www.npmjs.com/package/@monaco-editor/react)
-* [Docker](https://www.docker.com/)
-* [GitHub OAuth](https://docs.github.com/en/developers/apps/building-oauth-apps)
-
----
+- Judge0 API (https://judge0.com/)  
+- Spring Boot (https://spring.io/)  
+- Vite (https://vite.dev/)  
+- Monaco Editor (https://www.npmjs.com/package/@monaco-editor/react)  
+- Docker (https://www.docker.com/)  
+- GitHub OAuth (https://docs.github.com/en/developers/apps/building-oauth-apps)
